@@ -16,7 +16,6 @@ public class MainActivity extends AppCompatActivity {
             "https://lmg.jj20.com/up/allimg/4k/s/02/21092423235VL7-0-lp.jpg",
             "https://lmg.jj20.com/up/allimg/4k/s/02/21092423240420G-0-lp.jpg",
             "https://lmg.jj20.com/up/allimg/4k/s/02/2110021A2324239-0-lp.jpg"
-//            "https://lmg.jj20.com/up/allimg/4k/s/02/21092423235VL7-0-lp.jpg"
     );
 
     private Banner banner;

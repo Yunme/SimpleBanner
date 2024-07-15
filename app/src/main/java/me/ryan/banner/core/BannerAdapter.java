@@ -35,7 +35,7 @@ public class BannerAdapter extends RecyclerView.Adapter<BannerAdapter.BannerView
     @Override
     public int getItemCount() {
         if (data.size() < 2) return data.size();
-        return getRealItemCount() + 1;
+        return getRealItemCount() + 2;
     }
 
     public int getRealItemCount() {

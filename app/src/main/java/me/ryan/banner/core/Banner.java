@@ -39,7 +39,7 @@ public class Banner extends FrameLayout implements DefaultLifecycleObserver {
         @Override
         public void run() {
             int index = getCurrentIndex();
-            int count = getCount();
+            int count = getItemCount();
             viewPager.setCurrentItem((index + 1) % count);
             postDelayed(this, AUTO_SCROLL_TIME_SECOND);
         }
@@ -49,8 +49,13 @@ public class Banner extends FrameLayout implements DefaultLifecycleObserver {
 
         @Override
         public void onPageScrollStateChanged(int state) {
-            if (state == ViewPager2.SCROLL_STATE_IDLE && getCurrentIndex() == getCount() - 1) {
-                viewPager.setCurrentItem(0, false);
+            if (state == ViewPager2.SCROLL_STATE_IDLE) {
+                int index = getCurrentIndex();
+                if (index == 0) {
+                    viewPager.setCurrentItem(getRealItemCount(), false);
+                } else if (index == getItemCount() - 1) {
+                    viewPager.setCurrentItem(1, false);
+                }
             }
         }
     };
@@ -89,15 +94,23 @@ public class Banner extends FrameLayout implements DefaultLifecycleObserver {
         return viewPager.getCurrentItem();
     }
 
-    public int getCount() {
-        if (viewPager.getAdapter() != null) {
-            return viewPager.getAdapter().getItemCount();
+    public int getRealItemCount() {
+        if (adapter != null) {
+            return adapter.getRealItemCount();
+        }
+        return 0;
+    }
+
+    public int getItemCount() {
+        if (adapter != null) {
+            return adapter.getItemCount();
         }
         return 0;
     }
 
     public void setData(List<String> data) {
         adapter.setData(data);
+        viewPager.setCurrentItem(1, false);
         startAutoScroll();
     }
 
