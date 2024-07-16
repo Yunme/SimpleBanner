@@ -110,7 +110,9 @@ public class Banner extends FrameLayout implements DefaultLifecycleObserver {
 
     public void setData(List<String> data) {
         adapter.setData(data);
-        viewPager.setCurrentItem(1, false);
+        if (data.size() > 1) {
+            viewPager.setCurrentItem(1, false);
+        }
         startAutoScroll();
     }
 
@@ -119,6 +121,7 @@ public class Banner extends FrameLayout implements DefaultLifecycleObserver {
         int action = ev.getActionMasked();
         switch (action) {
             case MotionEvent.ACTION_UP:
+            case MotionEvent.ACTION_CANCEL:
                 startAutoScroll();
                 break;
             case MotionEvent.ACTION_DOWN:
